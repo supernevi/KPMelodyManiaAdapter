@@ -1,4 +1,5 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using static System.Net.WebRequestMethods;
 
 // Add settings to your mod by implementing IModSettings.
 // IModSettings extends IAutoBoundMod,
@@ -6,19 +7,14 @@ using System.Collections.Generic;
 // Mod settings are saved to file when the app is closed.
 public class KaraokeProviderAdapterModSettings : IModSettings
 {
-    public bool myBool = true;
-    public double myDouble = 12.34;
-    public int myInt = 42;
-    public string myString = "text";
+    private string karaokeProviderApiUrl = "http://localhost:8080/songs";
+    public string KaraokeProviderApiUrl { get { return karaokeProviderApiUrl;} }
 
     public List<IModSettingControl> GetModSettingControls()
     {
         return new List<IModSettingControl>()
         {
-            new BoolModSettingControl(() => myBool, newValue => myBool = newValue) { Label = "My Bool" },
-            new DoubleModSettingControl(() => myDouble, newValue => myDouble = newValue) { Label = "My Double" },
-            new IntModSettingControl(() => myInt, newValue => myInt = newValue) { Label = "My Int" },
-            new StringModSettingControl(() => myString, newValue => myString = newValue) { Label = "My String" },
+            new StringModSettingControl(() => karaokeProviderApiUrl, newValue => karaokeProviderApiUrl = newValue) { Label = "API URL to Karaoke Provider" },
         };
     }
 }
